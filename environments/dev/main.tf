@@ -11,10 +11,10 @@ module "dev_vpc" {
   private_subnet_cidr = var.private_subnet_cidr
 }
 
-#module "dev_public_ec2" {
-#  source        = "../../modules/ec2"
-#  ec2_count     = var.ec2_count
-# ami_id        = var.ami_id
-#  instance_type = var.instance_type
-#  subnet_id     = module.dev_vpc.public_subnet_id
-#}
+module "dev_public_ec2" {
+  source        = "../../modules/ec2"
+  ec2_count     = var.ec2_count
+  ami_id        = var.ami_id
+  instance_type = var.instance_type
+  subnet_id     = module.dev_vpc.public_subnet_id
+}

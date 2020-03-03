@@ -38,17 +38,17 @@ resource "aws_internet_gateway" "igw" {
 }
 
 # EIP for NAT Gateway
-resource "aws_eip" "nat" {
-  vpc = true
-  depends_on = [aws_internet_gateway.igw]
-}
+#resource "aws_eip" "nat" {
+#  vpc = true
+#  depends_on = [aws_internet_gateway.igw]
+#}
 
 # NAT Gateway (in public subnet)
-resource "aws_nat_gateway" "natgw" {
-  allocation_id = aws_eip.nat.id
-  subnet_id     = aws_subnet.public.id
-  depends_on = [aws_internet_gateway.igw]
-}
+#resource "aws_nat_gateway" "natgw" {
+#  allocation_id = aws_eip.nat.id
+#  subnet_id     = aws_subnet.public.id
+#  depends_on = [aws_internet_gateway.igw]
+#}
 
 # Custom route table with route to internet gateway
 resource "aws_route_table" "custom_route_table" {
