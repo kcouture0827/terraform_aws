@@ -1,8 +1,9 @@
 # Key Pair for our instance
 resource "aws_key_pair" "keypair" {
   key_name   = "mykey"
-  public_key = file("C:\\Users\\Kcout\\terraform.pub")
+  public_key = file("/home/kevin/.ssh/terraform.pub")
 }
+
 
 # EC2 instance with NGINX bootstraping
 resource "aws_instance" "test-instance" {
@@ -12,11 +13,14 @@ resource "aws_instance" "test-instance" {
   instance_type = var.instance_type
   subnet_id     = var.subnet_id
   associate_public_ip_address = true
-  
+  vpc_security_group_ids = [
+      var.security_group_id,
+  ]
+
   connection {
     type        = "ssh"
     user        = "ec2-user"
-    private_key = file("C:\\Users\\Kcout\\terraform")
+    private_key = file("/home/kevin/.ssh/terraform")
     host        = self.public_ip
   }
 
@@ -32,4 +36,3 @@ resource "aws_instance" "test-instance" {
     Name = "nginx"
   }
 }
-

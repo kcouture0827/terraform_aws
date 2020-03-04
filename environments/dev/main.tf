@@ -17,4 +17,5 @@ module "dev_public_ec2" {
   ami_id        = var.ami_id
   instance_type = var.instance_type
   subnet_id     = module.dev_vpc.public_subnet_id
+  security_group_id     = module.dev_vpc.security_group_id
 }
